@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.editlistdata.edit_user_details.ui.EditUserDetails
 import com.example.editlistdata.R
 import com.example.editlistdata.database.UsersDataBase
+import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.users_list.domain.UsersRepository
 import com.example.editlistdata.users_list.domain.modules.User
 
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        usersDataBase = UsersDatabaseProvider.getDataBaseInstance(this)
+        usersRepository = UsersRepository(usersDataBase.usersDao)
+        usersViewModel = UsersViewModel(usersRepository)
+
         userRecyclerView = findViewById(R.id.usersRecyclerView)
 
 
@@ -39,13 +45,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
-
-
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
+
 
 
 }

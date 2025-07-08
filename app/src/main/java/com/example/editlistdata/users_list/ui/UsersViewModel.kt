@@ -36,18 +36,7 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
 
     }
 
-    fun getUserWithUserID(userId: String) {
-        try {
-            viewModelScope.launch {
 
-
-            }
-
-        } catch (e: Exception) {
-            Log.e(logTag, "error message : ${e.message}")
-        }
-
-    }
 
 
     private fun writeAllUsersData() {
@@ -62,18 +51,6 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
 
     }
 
-
-    fun updateUserWithUserId(user: User) {
-        try {
-            viewModelScope.launch {
-
-
-            }
-        } catch (e: Exception) {
-            Log.e(logTag, "error message : ${e.message}")
-        }
-
-    }
 
     private fun getUsersStaticList() : List<User>{
         return listOf(

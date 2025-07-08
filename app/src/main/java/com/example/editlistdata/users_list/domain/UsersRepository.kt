@@ -10,12 +10,7 @@ class UsersRepository( private val usersDao: UsersDao) {
 
     suspend fun getAllUsers()= usersDao.getAllUsers()
 
-    suspend fun getUserWithUserID(userId: String) = usersDao.getUserWithUserID(userId)
-
-
     suspend fun writeAllUsersData(users: List<User>) = usersDao.writeAllUsersData(users)
 
-
-    suspend fun updateUserWithUserId(user: User) = usersDao.updateUserWithUserId(user)
 
 }
