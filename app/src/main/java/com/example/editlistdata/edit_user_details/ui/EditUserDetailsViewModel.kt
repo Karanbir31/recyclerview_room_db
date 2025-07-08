@@ -15,8 +15,6 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
     private val _user = MutableLiveData<User>(User())
     val user : LiveData<User> = _user
 
-
-
     fun getUserWithUserID(userId: String) {
         try {
             viewModelScope.launch {
@@ -29,10 +27,11 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
 
     }
 
-    fun updateUserWithUserId(user: User) {
+    fun updateUserWithUserId(updatedName: String) {
         try {
             viewModelScope.launch {
-                repository.updateUserWithUserId(user)
+                val updatedUserDetails = _user.value?.copy(userName = updatedName)
+                repository.updateUserWithUserId(updatedUserDetails!!)
             }
         } catch (e: Exception) {
             Log.e(logTag, "error message : ${e.message}")
