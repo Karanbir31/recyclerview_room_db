@@ -1,9 +1,12 @@
 package com.example.editlistdata.edit_user_details.ui
 
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.editlistdata.R
 import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
@@ -12,6 +15,8 @@ import com.example.editlistdata.edit_user_details.domain.EditUserDetailsReposito
 class EditUserDetails : AppCompatActivity() {
 
     private lateinit var userIdTextView : TextView
+    private lateinit var userNameEditText: EditText
+    private lateinit var userImageView : ImageView
 
     private lateinit var usersDataBase: UsersDataBase
     private lateinit var viewModel: EditUserDetailsViewModel
@@ -27,6 +32,8 @@ class EditUserDetails : AppCompatActivity() {
         viewModel = EditUserDetailsViewModel(repository)
 
         userIdTextView = findViewById(R.id.userId)
+        userImageView = findViewById(R.id.userProfileImage)
+        userNameEditText = findViewById(R.id.userNameEditText)
 
         val userId = intent.getStringExtra("userId")
         if (!userId.isNullOrEmpty()){
@@ -36,7 +43,12 @@ class EditUserDetails : AppCompatActivity() {
         viewModel.user.observe(
             this,
             Observer {user->
-                userIdTextView.text = user.userName ?: "user id not available"
+
+                Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
+
+                userIdTextView.text = userId
+
+                userNameEditText.setText(user.userName)
             }
         )
 

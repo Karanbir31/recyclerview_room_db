@@ -37,13 +37,13 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
     }
 
 
-
-
     private fun writeAllUsersData() {
         try {
             viewModelScope.launch {
                 val users: List<User> = getUsersStaticList()
                 usersRepository.writeAllUsersData(users)
+
+                getAllUsers()
             }
         } catch (e: Exception) {
             Log.e(logTag, "error message : ${e.message}")

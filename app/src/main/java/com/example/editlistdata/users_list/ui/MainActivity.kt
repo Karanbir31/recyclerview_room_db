@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var usersRepository: UsersRepository
     private lateinit var usersViewModel: UsersViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         usersViewModel = UsersViewModel(usersRepository)
 
         userRecyclerView = findViewById(R.id.usersRecyclerView)
-
 
         usersViewModel.users.observe(
             this,
@@ -46,8 +44,5 @@ class MainActivity : AppCompatActivity() {
             }
         )
     }
-
-
-
 
 }
