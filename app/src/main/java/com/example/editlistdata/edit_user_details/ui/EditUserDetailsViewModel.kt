@@ -1,5 +1,6 @@
 package com.example.editlistdata.edit_user_details.ui
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,6 +38,12 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
             Log.e(logTag, "error message : ${e.message}")
         }
 
+    }
+
+
+    fun updateUserImage(uri : Uri){
+        val temp =  _user.value
+        _user.value = temp?.copy(userProfilePhoto = uri.toString())
     }
 
 
