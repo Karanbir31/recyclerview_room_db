@@ -1,7 +1,6 @@
 package com.example.editlistdata.edit_user_details.ui
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,57 +10,108 @@
     tools:context=".edit_user_details.ui.EditUserDetails">
 
 
-    <ImageView
-        android:id="@+id/userProfileImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="120dp"
-        android:contentDescription="User profile image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/userNameEditText"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/UserProfileHead"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="User Name"
-        android:textSize="14sp"
-        android:inputType="none"
-        android:padding="8dp"
+        android:layout_height="0dp"
+        android:background="@drawable/user_profile_header_bg"
+        app:layout_constraintBottom_toTopOf="@+id/UserProfileBody"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userId" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.7f">
 
-    <TextView
-        android:id="@+id/userId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="User Id"
-        android:textSize="16sp"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userProfileImage" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/userProfileImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="User profile image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_person" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:textSize="14sp"
+        android:layout_marginHorizontal="64dp"
+        android:paddingVertical="8dp"
         android:text="Submit"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/UserProfileBody"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileHead" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/UserProfileBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfileHead"
+        app:layout_constraintVertical_weight="1f">
+
+        <ImageView
+            android:id="@+id/userNameIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/userNameEditText"
+            app:layout_constraintEnd_toStartOf="@+id/userNameText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userNameText" />
+
+
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="8dp"
+            android:text="User Id"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userNameIcon"
+            app:layout_constraintTop_toTopOf="@+id/userNameIcon" />
+
+        <EditText
+            android:id="@+id/userNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:inputType="none"
+            android:padding="8dp"
+            android:text="User Name"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toEndOf="@+id/userNameIcon"
+            app:layout_constraintTop_toBottomOf="@+id/userNameIcon" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
