@@ -2,6 +2,8 @@ package com.example.editlistdata.users_list.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,17 @@ import com.example.editlistdata.users_list.domain.UsersRepository
 import com.example.editlistdata.users_list.domain.modules.User
 
 class MainActivity : AppCompatActivity() {
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK ) {
+            val data = result.data?.getStringExtra("userId")
+            // Handle result
+            Toast.makeText(this@MainActivity, "User $data is updated", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var usersDataBase: UsersDataBase
@@ -39,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, EditUserDetails::class.java).apply {
                         putExtra("userId", userId)
                     }
-                    startActivity(intent)
+                    resultLauncher.launch(intent)
                 }
             }
         )

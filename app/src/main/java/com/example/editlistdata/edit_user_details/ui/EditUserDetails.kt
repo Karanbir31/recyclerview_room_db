@@ -1,5 +1,6 @@
 package com.example.editlistdata.edit_user_details.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -60,7 +61,10 @@ class EditUserDetails : AppCompatActivity() {
             viewModel.updateUserWithUserId(userNameEditText.text.toString())
 
             try {
-                setResult(RESULT_OK)
+                val resultIntent = Intent().apply {
+                    putExtra("userId",userId)
+                }
+                setResult(RESULT_OK, resultIntent)
                 finish()
             }catch (e : Exception){
                 Toast.makeText(this@EditUserDetails, "Unable to go back!!", Toast.LENGTH_SHORT).show()
