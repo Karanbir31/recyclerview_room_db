@@ -16,10 +16,11 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
     val users: LiveData<List<User>> get() = _users
 
     init {
+        Log.d("UsersViewModel", "Users ViewModel Instance is created")
         getAllUsers()
     }
 
-    private fun getAllUsers() {
+    fun getAllUsers() {
         try {
             viewModelScope.launch {
                 val usersList = usersRepository.getAllUsers()
