@@ -18,6 +18,7 @@ import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.edit_user_details.domain.EditUserDetailsRepository
 import androidx.core.net.toUri
+import androidx.core.widget.addTextChangedListener
 import java.time.LocalDate
 import java.util.Calendar
 
@@ -45,7 +46,8 @@ class EditUserDetails : AppCompatActivity() {
 
     private lateinit var submitButton : Button
     private lateinit var userImageView: ImageView
-    private lateinit var userWorkProfileEditText: TextView
+    private lateinit var userWorkProfileText: TextView
+
     private lateinit var userNameEditText: EditText
     private lateinit var userMobileNumberEditText: EditText
     private lateinit var userEmailEditText: EditText
@@ -68,7 +70,7 @@ class EditUserDetails : AppCompatActivity() {
         submitButton = findViewById(R.id.submitButton)
 
         userImageView = findViewById(R.id.userProfileImage)
-        userWorkProfileEditText = findViewById(R.id.userWorkProfileText)
+        userWorkProfileText = findViewById(R.id.userWorkProfileText)
 
         userNameEditText = findViewById(R.id.userNameEditText)
         userDOBText = findViewById(R.id.userDOBText)
@@ -103,7 +105,7 @@ class EditUserDetails : AppCompatActivity() {
                 val userImage = user.userProfilePhoto.toUri()
                 Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
 
-                userWorkProfileEditText.text = user.userWorkProfile
+                userWorkProfileText.text = user.userWorkProfile
 
                 userNameEditText.setText(user.userName)
 
@@ -129,18 +131,23 @@ class EditUserDetails : AppCompatActivity() {
 
             if(viewModel.validateEmail(email) && viewModel.validateMobileNumber(mobileNumber)){
                 viewModel.updateUserWithUserId(userNameEditText.text.toString())
-            }
-            try {
-                val resultIntent = Intent().apply {
-                    putExtra("userId", userId)
-                }
-                setResult(RESULT_OK, resultIntent)
-                finish()
-            } catch (e: Exception) {
-                Toast.makeText(this@EditUserDetails, "Unable to go back!!", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
 
+                try {
+                    val resultIntent = Intent().apply {
+                        putExtra("userId", userId)
+                    }
+                    setResult(RESULT_OK, resultIntent)
+                    finish()
+                } catch (e: Exception) {
+                    Toast.makeText(this@EditUserDetails, "Unable to go back!!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+
+            }else{
+                Toast.makeText(this, "Enter valid email or mobile number", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 }
