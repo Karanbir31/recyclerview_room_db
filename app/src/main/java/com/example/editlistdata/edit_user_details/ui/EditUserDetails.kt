@@ -1,5 +1,6 @@
 package com.example.editlistdata.edit_user_details.ui
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.editlistdata.R
@@ -18,6 +18,8 @@ import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.edit_user_details.domain.EditUserDetailsRepository
 import androidx.core.net.toUri
+import java.time.LocalDate
+import java.util.Calendar
 
 
 class EditUserDetails : AppCompatActivity() {
@@ -45,7 +47,7 @@ class EditUserDetails : AppCompatActivity() {
     private lateinit var userImageView: ImageView
     private lateinit var userWorkProfileEditText: TextView
     private lateinit var userNameEditText: EditText
-    private lateinit var userMobileNumber: EditText
+    private lateinit var userMobileNumberEditText: EditText
     private lateinit var userEmailEditText: EditText
     private lateinit var userAddressEditText: EditText
     private lateinit var userDOBText: TextView
@@ -70,7 +72,7 @@ class EditUserDetails : AppCompatActivity() {
 
         userNameEditText = findViewById(R.id.userNameEditText)
         userDOBText = findViewById(R.id.userDOBText)
-        userMobileNumber = findViewById(R.id.userMobileNumberEditText)
+        userMobileNumberEditText = findViewById(R.id.userMobileNumberEditText)
         userEmailEditText = findViewById(R.id.userEmailEditText)
         userAddressEditText = findViewById(R.id.userAddressEditText)
 
@@ -80,6 +82,20 @@ class EditUserDetails : AppCompatActivity() {
             viewModel.getUserWithUserID(userId)
         }
 
+        // select user date of birth using date picker dialog
+        userDOBText.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(this@EditUserDetails, { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = LocalDate.of(selectedYear, selectedMonth + 1, selectedDay)
+                viewModel.updateUserDOB(selectedDate)
+            }, year, month, day).show()
+        }
+
+
         viewModel.user.observe(
             this,
             Observer { user ->
@@ -87,7 +103,18 @@ class EditUserDetails : AppCompatActivity() {
                 val userImage = user.userProfilePhoto.toUri()
                 Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
 
+                userWorkProfileEditText.text = user.userWorkProfile
+
                 userNameEditText.setText(user.userName)
+
+                userDOBText.text = user.getUserDOBStr()
+
+                userMobileNumberEditText.setText(user.userMobileNumber.toString())
+
+                userEmailEditText.setText(user.userEmail)
+
+                userAddressEditText.setText(user.userAddress)
+
             }
         )
 
@@ -98,7 +125,7 @@ class EditUserDetails : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             val email = userEmailEditText.text.toString()
-            val mobileNumber = userMobileNumber.text.toString()
+            val mobileNumber = userMobileNumberEditText.text.toString()
 
             if(viewModel.validateEmail(email) && viewModel.validateMobileNumber(mobileNumber)){
                 viewModel.updateUserWithUserId(userNameEditText.text.toString())

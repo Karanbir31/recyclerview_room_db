@@ -19,7 +19,12 @@ data class User  constructor(
     val userEmail: String = "xyx@test.com",
     val userAddress : String = "Amritsar",
     val userDOB: LocalDate= LocalDate.of(2025, 1, 1)
-)
+){
+
+    fun getUserDOBStr(): String{
+        return  this.userDOB.format(DateTimeFormatter.ISO_LOCAL_DATE)
+    }
+}
 
 class UsersDOBConvertor() {
 
