@@ -22,6 +22,7 @@
         app:layout_constraintVertical_weight="0.7f">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/userProfileImageBackground"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:foregroundGravity="center"
@@ -29,7 +30,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4">
 
             <ImageView
                 android:id="@+id/userProfileImage"
@@ -40,6 +42,22 @@
                 android:src="@drawable/ic_person" />
 
         </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            android:id="@+id/userWorkProfileText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            android:text="Profile"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImageBackground"
+            app:layout_constraintVertical_bias="0.2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -57,7 +75,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserProfileHead" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:id="@+id/UserProfileBody"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -65,53 +84,255 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/UserProfileHead"
+
         app:layout_constraintVertical_weight="1f">
 
-        <ImageView
-            android:id="@+id/userNameIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_person"
-            app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintBottom_toBottomOf="@+id/userNameEditText"
-            app:layout_constraintEnd_toStartOf="@+id/userNameText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/userNameText" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
 
-        <TextView
-            android:id="@+id/userNameText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:padding="8dp"
-            android:text="User Id"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/userNameIcon"
-            app:layout_constraintTop_toTopOf="@+id/userNameIcon" />
+            <TextView
+                android:id="@+id/accountIntoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:paddingVertical="8dp"
+                android:text="Account Information"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/userNameEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:inputType="none"
-            android:padding="8dp"
-            android:text="User Name"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            <!--        user Name row-->
 
-            app:layout_constraintStart_toEndOf="@+id/userNameIcon"
-            app:layout_constraintTop_toBottomOf="@+id/userNameIcon" />
+            <ImageView
+                android:id="@+id/userNameIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_person_24"
+                app:layout_constraintBottom_toBottomOf="@+id/userNameEditText"
+                app:layout_constraintEnd_toStartOf="@+id/userNameText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accountIntoText" />
+
+            <TextView
+                android:id="@+id/userNameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="User Name"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toEndOf="@id/userNameIcon"
+                app:layout_constraintTop_toBottomOf="@id/accountIntoText" />
+
+            <EditText
+                android:id="@+id/userNameEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:inputType="phone"
+                android:padding="8dp"
+                android:text="User phone"
+
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userNameIcon"
+                app:layout_constraintTop_toBottomOf="@id/userNameText" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--        User DOB Row-->
+
+            <ImageView
+                android:id="@+id/userDOBIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_calander_24"
+                app:layout_constraintBottom_toBottomOf="@id/userDOBText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userNameEditText"
+
+                />
+
+            <TextView
+                android:id="@+id/userDOBTextTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="Date Of Birth"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userDOBIcon"
+                app:layout_constraintTop_toBottomOf="@id/userNameEditText" />
+
+            <TextView
+                android:id="@+id/userDOBText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:inputType="none"
+                android:padding="8dp"
+                android:text="User D.O.B."
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userDOBIcon"
+                app:layout_constraintTop_toBottomOf="@id/userDOBTextTitle" />
+
+            <!--        User Mobile Number Row-->
+
+            <ImageView
+                android:id="@+id/userMobileNumberIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_phone_24"
+                app:layout_constraintBottom_toBottomOf="@id/userMobileNumberEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/userMobileNumberText" />
+
+            <TextView
+                android:id="@+id/userMobileNumberText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="User Mobile Numnber"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textSize="16sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userMobileNumberIcon"
+                app:layout_constraintTop_toBottomOf="@id/userDOBText" />
+
+            <EditText
+                android:id="@+id/userMobileNumberEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:inputType="phone"
+                android:padding="8dp"
+                android:text="User phone"
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="18sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userMobileNumberIcon"
+                app:layout_constraintTop_toBottomOf="@id/userMobileNumberText" />
+
+
+            <!--        User Email address row-->
+
+            <ImageView
+                android:id="@+id/userEmailIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_email_24"
+                app:layout_constraintBottom_toBottomOf="@id/userEmailText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/userEmailEditText" />
+
+            <TextView
+                android:id="@+id/userEmailText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="User email"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userEmailIcon"
+                app:layout_constraintTop_toBottomOf="@id/userMobileNumberEditText" />
+
+            <EditText
+                android:id="@+id/userEmailEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:text="User Email"
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userEmailIcon"
+                app:layout_constraintTop_toBottomOf="@id/userEmailText" />
+
+
+            <!--        User Address Row-->
+
+            <ImageView
+                android:id="@+id/userAddressIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="@id/userAddressEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/userAddressText" />
+
+            <TextView
+                android:id="@+id/userAddressText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="Address"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textSize="16sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userAddressIcon"
+                app:layout_constraintTop_toBottomOf="@id/userEmailEditText" />
+
+            <EditText
+                android:id="@+id/userAddressEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="User Address"
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="18sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userAddressIcon"
+                app:layout_constraintTop_toBottomOf="@id/userAddressText" />
+
+
+            <!--            -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userAddressEditText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

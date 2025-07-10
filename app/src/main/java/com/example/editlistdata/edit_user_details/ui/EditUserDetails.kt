@@ -18,6 +18,7 @@ import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.edit_user_details.domain.EditUserDetailsRepository
 import androidx.core.net.toUri
+import org.w3c.dom.Text
 
 class EditUserDetails : AppCompatActivity() {
 
@@ -40,10 +41,14 @@ class EditUserDetails : AppCompatActivity() {
 
         }
 
-    private lateinit var userIdTextView: TextView
-    private lateinit var userNameEditText: EditText
+    private lateinit var submitButton : Button
     private lateinit var userImageView: ImageView
-    private lateinit var submitButton: Button
+    private lateinit var userWorkProfileEditText: TextView
+    private lateinit var userNameEditText: EditText
+    private lateinit var userMobileNumber: EditText
+    private lateinit var userEmailEditText: EditText
+    private lateinit var userAddressEditText: EditText
+    private lateinit var userDOBText: Text
 
     private lateinit var usersDataBase: UsersDataBase
     private lateinit var viewModel: EditUserDetailsViewModel
@@ -58,10 +63,17 @@ class EditUserDetails : AppCompatActivity() {
         repository = EditUserDetailsRepository(usersDataBase.usersDao)
         viewModel = EditUserDetailsViewModel(repository)
 
-        userIdTextView = findViewById(R.id.userId)
-        userImageView = findViewById(R.id.userProfileImage)
-        userNameEditText = findViewById(R.id.userNameEditText)
         submitButton = findViewById(R.id.submitButton)
+
+        userImageView = findViewById(R.id.userProfileImage)
+        userWorkProfileEditText = findViewById(R.id.userWorkProfileText)
+
+        userNameEditText = findViewById(R.id.userNameEditText)
+        userDOBText = findViewById(R.id.userDOBText)
+        userMobileNumber = findViewById(R.id.userMobileNumberText)
+        userEmailEditText = findViewById(R.id.userEmailEditText)
+        userAddressEditText = findViewById(R.id.userAddressEditText)
+
 
         val userId = intent.getStringExtra("userId")
         if (!userId.isNullOrEmpty()) {
@@ -75,7 +87,6 @@ class EditUserDetails : AppCompatActivity() {
                 val userImage = user.userProfilePhoto.toUri()
                 Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
 
-                userIdTextView.text = userId
 
                 userNameEditText.setText(user.userName)
             }
