@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.editlistdata.R
 import com.example.editlistdata.users_list.domain.modules.User
+import com.google.android.material.card.MaterialCardView
 
 class UserRcvAdapter(
     private val users: List<User>,
@@ -21,7 +22,7 @@ class UserRcvAdapter(
         private lateinit var context : Context
 
     inner class UserRcvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var rcvLayout = view.findViewById<ConstraintLayout>(R.id.rcvLayout)
+        var rcvLayout = view.findViewById<MaterialCardView>(R.id.rcvLayout)
         var userPic = view.findViewById<ImageView>(R.id.rcvUserImage)
         var userId = view.findViewById<TextView>(R.id.rcvUserId)
         var userName = view.findViewById<TextView>(R.id.rcvUserName)

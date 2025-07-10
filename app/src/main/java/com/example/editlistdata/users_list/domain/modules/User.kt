@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -17,13 +18,15 @@ data class User  constructor(
     val userMobileNumber: Long = 0,
     val userEmail: String = "xyx@test.com",
     val userAddress : String = "Amritsar",
-    val userDOB: LocalDate? = null
+    val userDOB: LocalDate= LocalDate.of(2025, 1, 1)
 )
 
 class UsersDOBConvertor() {
 
+    @TypeConverter
     fun fromLocalDate(date: LocalDate): String = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
 
+    @TypeConverter
     fun toLocalDate(date: String): LocalDate =
         LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE)
 }

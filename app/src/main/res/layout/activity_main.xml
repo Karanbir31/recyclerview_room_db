@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#B3DEDEDE"
     tools:context=".users_list.ui.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView

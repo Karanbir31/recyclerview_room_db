@@ -1,10 +1,8 @@
 package com.example.editlistdata.edit_user_details.ui
 
 import android.net.Uri
-import android.os.Build
 import android.util.Log
 import android.util.Patterns
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +15,7 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
     private val logTag = "EditUserDetailsViewModel"
 
 
-    private val _user = MutableLiveData<User>(User())
+    private val _user = MutableLiveData(User())
     val user : LiveData<User> = _user
 
     fun getUserWithUserID(userId: String) {
@@ -29,7 +27,6 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
         } catch (e: Exception) {
             Log.e(logTag, "error message : ${e.message}")
         }
-
     }
 
     fun updateUserWithUserId(updatedName: String) {
@@ -54,8 +51,7 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun validateMobileNumber(number: Long): Boolean {
-        val numberStr = number.toString()
+    fun validateMobileNumber(numberStr: String): Boolean {
         return numberStr.length == 10 && numberStr.all { it.isDigit() }
     }
 

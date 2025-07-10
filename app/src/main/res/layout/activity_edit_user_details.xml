@@ -19,13 +19,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.7f">
+        app:layout_constraintVertical_weight="0.5">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/userProfileImageBackground"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:foregroundGravity="center"
             app:cardCornerRadius="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +36,7 @@
                 android:id="@+id/userProfileImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_gravity="center"
                 android:contentDescription="User profile image"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_person" />
@@ -62,13 +62,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="64dp"
+        android:background="@drawable/button_gradient"
         android:paddingVertical="8dp"
-        android:text="Submit"
+        android:text="Update"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/UserProfileBody"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,14 +85,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/UserProfileHead"
-
-        app:layout_constraintVertical_weight="1f">
+        app:layout_constraintVertical_weight="1">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
@@ -113,28 +111,25 @@
 
             <ImageView
                 android:id="@+id/userNameIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_person_24"
                 app:layout_constraintBottom_toBottomOf="@+id/userNameEditText"
                 app:layout_constraintEnd_toStartOf="@+id/userNameText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accountIntoText" />
+                app:layout_constraintTop_toTopOf="@+id/userNameText" />
 
             <TextView
                 android:id="@+id/userNameText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
-                android:text="User Name"
-                android:textColor="@color/material_on_background_emphasis_high_type"
-
+                android:text="Name"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintStart_toEndOf="@id/userNameIcon"
                 app:layout_constraintTop_toBottomOf="@id/accountIntoText" />
 
@@ -142,15 +137,14 @@
                 android:id="@+id/userNameEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:inputType="phone"
+                android:background="@android:color/transparent"
+                android:hint="Enter User Name"
+                android:inputType="text"
                 android:padding="8dp"
-                android:text="User phone"
-
-                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/userNameIcon"
+                app:layout_constraintStart_toStartOf="@id/userNameText"
                 app:layout_constraintTop_toBottomOf="@id/userNameText" />
 
 
@@ -158,24 +152,23 @@
 
             <ImageView
                 android:id="@+id/userDOBIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_calander_24"
                 app:layout_constraintBottom_toBottomOf="@id/userDOBText"
+                app:layout_constraintEnd_toStartOf="@+id/userDOBTextTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userNameEditText"
-
-                />
+                app:layout_constraintTop_toBottomOf="@id/userNameEditText" />
 
             <TextView
                 android:id="@+id/userDOBTextTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
                 android:text="Date Of Birth"
-                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -186,25 +179,25 @@
                 android:id="@+id/userDOBText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:inputType="none"
                 android:padding="8dp"
-                android:text="User D.O.B."
-                android:textColor="@color/material_on_background_emphasis_medium"
+                android:hint="Set D.O.B."
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/userDOBIcon"
+                app:layout_constraintStart_toStartOf="@id/userDOBTextTitle"
                 app:layout_constraintTop_toBottomOf="@id/userDOBTextTitle" />
 
             <!--        User Mobile Number Row-->
 
             <ImageView
                 android:id="@+id/userMobileNumberIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_phone_24"
                 app:layout_constraintBottom_toBottomOf="@id/userMobileNumberEditText"
+                app:layout_constraintEnd_toStartOf="@+id/userMobileNumberText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/userMobileNumberText" />
 
@@ -212,13 +205,11 @@
                 android:id="@+id/userMobileNumberText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
-                android:text="User Mobile Numnber"
-                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:text="Mobile"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="16sp"
                 android:textStyle="bold"
-
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/userMobileNumberIcon"
                 app:layout_constraintTop_toBottomOf="@id/userDOBText" />
@@ -227,15 +218,15 @@
                 android:id="@+id/userMobileNumberEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:hint="Enter Mobile Number"
                 android:inputType="phone"
                 android:padding="8dp"
-                android:text="User phone"
-                android:textColor="@color/material_on_background_emphasis_medium"
-                android:textSize="18sp"
 
+                android:textColor="@color/material_dynamic_primary0"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/userMobileNumberIcon"
+                app:layout_constraintStart_toStartOf="@id/userMobileNumberText"
                 app:layout_constraintTop_toBottomOf="@id/userMobileNumberText" />
 
 
@@ -243,11 +234,13 @@
 
             <ImageView
                 android:id="@+id/userEmailIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/baseline_email_24"
                 app:layout_constraintBottom_toBottomOf="@id/userEmailText"
+                app:layout_constraintEnd_toStartOf="@+id/userEmailText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/userEmailEditText" />
 
@@ -255,12 +248,11 @@
                 android:id="@+id/userEmailText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
-                android:text="User email"
-                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:text="Email"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/userEmailIcon"
                 app:layout_constraintTop_toBottomOf="@id/userMobileNumberEditText" />
@@ -269,14 +261,14 @@
                 android:id="@+id/userEmailEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:hint="User Email"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
-                android:text="User Email"
-                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/userEmailIcon"
+                app:layout_constraintStart_toStartOf="@id/userEmailText"
                 app:layout_constraintTop_toBottomOf="@id/userEmailText" />
 
 
@@ -284,10 +276,12 @@
 
             <ImageView
                 android:id="@+id/userAddressIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_person"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="16dp"
+                android:src="@drawable/baseline_add_location_alt_24"
                 app:layout_constraintBottom_toBottomOf="@id/userAddressEditText"
+                app:layout_constraintEnd_toStartOf="@+id/userAddressText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/userAddressText" />
 
@@ -295,13 +289,11 @@
                 android:id="@+id/userAddressText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
                 android:text="Address"
-                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textColor="@color/material_dynamic_primary0"
                 android:textSize="16sp"
                 android:textStyle="bold"
-
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/userAddressIcon"
                 app:layout_constraintTop_toBottomOf="@id/userEmailEditText" />
@@ -310,17 +302,15 @@
                 android:id="@+id/userAddressEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:hint="Enter Your Address"
                 android:inputType="text"
                 android:padding="8dp"
-                android:text="User Address"
-                android:textColor="@color/material_on_background_emphasis_medium"
                 android:textSize="18sp"
-
+                android:textColor="@color/material_dynamic_primary0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/userAddressIcon"
+                app:layout_constraintStart_toStartOf="@id/userAddressText"
                 app:layout_constraintTop_toBottomOf="@id/userAddressText" />
-
 
             <!--            -->
             <View

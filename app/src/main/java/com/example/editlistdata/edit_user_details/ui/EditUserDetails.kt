@@ -2,7 +2,6 @@ package com.example.editlistdata.edit_user_details.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.editlistdata.R
@@ -18,7 +18,7 @@ import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.edit_user_details.domain.EditUserDetailsRepository
 import androidx.core.net.toUri
-import org.w3c.dom.Text
+
 
 class EditUserDetails : AppCompatActivity() {
 
@@ -48,7 +48,7 @@ class EditUserDetails : AppCompatActivity() {
     private lateinit var userMobileNumber: EditText
     private lateinit var userEmailEditText: EditText
     private lateinit var userAddressEditText: EditText
-    private lateinit var userDOBText: Text
+    private lateinit var userDOBText: TextView
 
     private lateinit var usersDataBase: UsersDataBase
     private lateinit var viewModel: EditUserDetailsViewModel
@@ -70,7 +70,7 @@ class EditUserDetails : AppCompatActivity() {
 
         userNameEditText = findViewById(R.id.userNameEditText)
         userDOBText = findViewById(R.id.userDOBText)
-        userMobileNumber = findViewById(R.id.userMobileNumberText)
+        userMobileNumber = findViewById(R.id.userMobileNumberEditText)
         userEmailEditText = findViewById(R.id.userEmailEditText)
         userAddressEditText = findViewById(R.id.userAddressEditText)
 
@@ -87,7 +87,6 @@ class EditUserDetails : AppCompatActivity() {
                 val userImage = user.userProfilePhoto.toUri()
                 Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
 
-
                 userNameEditText.setText(user.userName)
             }
         )
@@ -97,14 +96,13 @@ class EditUserDetails : AppCompatActivity() {
             imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
-        userNameEditText.setOnClickListener {
-            userNameEditText.inputType = InputType.TYPE_CLASS_TEXT
-        }
-
-
         submitButton.setOnClickListener {
-            viewModel.updateUserWithUserId(userNameEditText.text.toString())
+            val email = userEmailEditText.text.toString()
+            val mobileNumber = userMobileNumber.text.toString()
 
+            if(viewModel.validateEmail(email) && viewModel.validateMobileNumber(mobileNumber)){
+                viewModel.updateUserWithUserId(userNameEditText.text.toString())
+            }
             try {
                 val resultIntent = Intent().apply {
                     putExtra("userId", userId)

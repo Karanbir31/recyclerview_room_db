@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.editlistdata.users_list.domain.UsersRepository
 import com.example.editlistdata.users_list.domain.modules.User
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel() {
     private val logTag = "UsersViewModel"
@@ -53,32 +54,19 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
     }
 
 
-    private fun getUsersStaticList() : List<User>{
+    private fun getUsersStaticList(): List<User> {
         return listOf(
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "001", userName = "Aarav Sharma"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "002", userName = "Isha Patel"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "003", userName = "Vihaan Gupta"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "004", userName = "Meera Nair"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "006", userName = "Kavya Desai"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "007", userName = "Rohan Mehta"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "005", userName = "Arjun Reddy"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "008", userName = "Tanvi Pillai"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "009", userName = "Dev Arya"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "010", userName = "Saanvi Verma"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "011", userName = "Yash Khanna"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "012", userName = "Anaya Singh"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "013", userName = "Manav Bansal"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "014", userName = "Diya Shetty"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "015", userName = "Krishna Dutta"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "016", userName = "Reyansh Malhotra"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "017", userName = "Aanya Joshi"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "018", userName = "Ishaan Rao"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "019", userName = "Sneha Kapoor"),
-            User(userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userId = "020", userName = "Aditya Bajaj")
+            User(userId = "001", userName = "Aarav Sharma", userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg", userWorkProfile = "Android Developer", userAddress = "Delhi", userMobileNumber = 9876543210, userEmail = "aarav.sharma@example.com", userDOB = LocalDate.of(1996, 3, 18)),
+            User(userId = "002", userName = "Isha Verma", userProfilePhoto = "https://randomuser.me/api/portraits/women/2.jpg", userWorkProfile = "UI/UX Designer", userAddress = "Mumbai", userMobileNumber = 9876543211, userEmail = "isha.verma@example.com", userDOB = LocalDate.of(1998, 7, 12)),
+            User(userId = "003", userName = "Rohan Mehta", userProfilePhoto = "https://randomuser.me/api/portraits/men/3.jpg", userWorkProfile = "Backend Engineer", userAddress = "Bengaluru", userMobileNumber = 9876543212, userEmail = "rohan.mehta@example.com", userDOB = LocalDate.of(1992, 11, 5)),
+            User(userId = "004", userName = "Kavya Nair", userProfilePhoto = "https://randomuser.me/api/portraits/women/4.jpg", userWorkProfile = "Product Manager", userAddress = "Chennai", userMobileNumber = 9876543213, userEmail = "kavya.nair@example.com", userDOB = LocalDate.of(1995, 1, 22)),
+            User(userId = "005", userName = "Vihaan Gupta", userProfilePhoto = "https://randomuser.me/api/portraits/men/5.jpg", userWorkProfile = "QA Analyst", userAddress = "Hyderabad", userMobileNumber = 9876543214, userEmail = "vihaan.gupta@example.com", userDOB = LocalDate.of(1994, 4, 30)),
+            User(userId = "006", userName = "Meera Joshi", userProfilePhoto = "https://randomuser.me/api/portraits/women/6.jpg", userWorkProfile = "Data Scientist", userAddress = "Kolkata", userMobileNumber = 9876543215, userEmail = "meera.joshi@example.com", userDOB = LocalDate.of(1997, 8, 9)),
+            User(userId = "007", userName = "Aditya Reddy", userProfilePhoto = "https://randomuser.me/api/portraits/men/7.jpg", userWorkProfile = "DevOps Engineer", userAddress = "Pune", userMobileNumber = 9876543216, userEmail = "aditya.reddy@example.com", userDOB = LocalDate.of(1993, 6, 14)),
+            User(userId = "008", userName = "Sneha Pillai", userProfilePhoto = "https://randomuser.me/api/portraits/women/8.jpg", userWorkProfile = "Marketing Strategist", userAddress = "Amritsar", userMobileNumber = 9876543217, userEmail = "sneha.pillai@example.com", userDOB = LocalDate.of(1990, 12, 27)),
+            User(userId = "009", userName = "Yash Kapoor", userProfilePhoto = "https://randomuser.me/api/portraits/men/9.jpg", userWorkProfile = "Frontend Developer", userAddress = "Lucknow", userMobileNumber = 9876543218, userEmail = "yash.kapoor@example.com", userDOB = LocalDate.of(1999, 2, 17)),
+            User(userId = "010", userName = "Anaya Singh", userProfilePhoto = "https://randomuser.me/api/portraits/women/10.jpg", userWorkProfile = "Graphic Designer", userAddress = "Jaipur", userMobileNumber = 9876543219, userEmail = "anaya.singh@example.com", userDOB = LocalDate.of(1996, 10, 4))
         )
-        // userProfilePhoto = "https://picsum.photos/200"
-        //userProfilePhoto = "https://randomuser.me/api/portraits/men/1.jpg"
-        //userProfilePhoto = "https://randomuser.me/api/portraits/women/2.jpg"
     }
 
 
