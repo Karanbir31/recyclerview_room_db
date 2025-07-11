@@ -19,7 +19,17 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
     private val _user = MutableLiveData(User())
     val user: LiveData<User> = _user
 
-    fun getUserWithUserID(userId: String) {
+    fun addNewUserData(){
+        try {
+            viewModelScope.launch {
+                repository.addNewUser(_user.value!!)
+            }
+        }catch (e : Exception){
+            Log.e(logTag, "error message : ${e.message}")
+        }
+    }
+
+    fun getUserWithUserID(userId: Int) {
         try {
             viewModelScope.launch {
                 _user.value = repository.getUserWithUserID(userId)
@@ -30,11 +40,10 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
         }
     }
 
-    fun updateUserWithUserId(updatedName: String) {
+    fun saveUpdatedUserDataInRoom() {
         try {
             viewModelScope.launch {
-                val updatedUserDetails = _user.value?.copy(userName = updatedName)
-                repository.updateUserWithUserId(updatedUserDetails!!)
+                repository.updateUserWithUserId(_user.value!!)
             }
         } catch (e: Exception) {
             Log.e(logTag, "error message : ${e.message}")
@@ -47,31 +56,28 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
         _user.value = temp?.copy(userProfilePhoto = uri.toString())
     }
 
-    fun updateUserName(name: String) {
-        val temp = _user.value
-        _user.value = temp?.copy(userName = name)
-    }
-
     fun updateUserDOB(date: LocalDate) {
         val temp = _user.value
         _user.value = temp?.copy(userDOB = date)
     }
 
-    fun updateUserMobileNumber(number: String) {
+    fun updateUserData(
+        userWorkProfile : String,
+        userName: String,
+        userEmail: String,
+        userMobileNumber: String,
+        userAddress: String
+    ) {
         val temp = _user.value
-        _user.value = temp?.copy(userMobileNumber = number.toLong())
-    }
+        _user.value = temp?.copy(
+            userWorkProfile = userWorkProfile,
+            userName =userName,
+            userEmail = userEmail,
+            userMobileNumber =userMobileNumber.toLong(),
+            userAddress = userAddress
+        )
 
-    fun updateUserEmail(email: String) {
-        val temp = _user.value
-        _user.value = temp?.copy(userEmail = email)
     }
-
-    fun updateUserAddress(address: String) {
-        val temp = _user.value
-        _user.value = temp?.copy(userAddress = address)
-    }
-
 
 
     fun validateEmail(email: String): Boolean {
@@ -80,6 +86,14 @@ class EditUserDetailsViewModel(private val repository: EditUserDetailsRepository
 
     fun validateMobileNumber(numberStr: String): Boolean {
         return numberStr.length == 10 && numberStr.all { it.isDigit() }
+    }
+
+    override fun onCleared() {
+
+        saveUpdatedUserDataInRoom()
+
+        super.onCleared()
+
     }
 
 

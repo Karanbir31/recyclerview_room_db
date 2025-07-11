@@ -18,13 +18,11 @@ import com.example.editlistdata.database.UsersDataBase
 import com.example.editlistdata.database.UsersDatabaseProvider
 import com.example.editlistdata.edit_user_details.domain.EditUserDetailsRepository
 import androidx.core.net.toUri
-import androidx.core.widget.addTextChangedListener
 import java.time.LocalDate
 import java.util.Calendar
 
 
 class EditUserDetails : AppCompatActivity() {
-
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -46,7 +44,7 @@ class EditUserDetails : AppCompatActivity() {
 
     private lateinit var submitButton : Button
     private lateinit var userImageView: ImageView
-    private lateinit var userWorkProfileText: TextView
+    private lateinit var userWorkProfileEditText: EditText
 
     private lateinit var userNameEditText: EditText
     private lateinit var userMobileNumberEditText: EditText
@@ -70,7 +68,7 @@ class EditUserDetails : AppCompatActivity() {
         submitButton = findViewById(R.id.submitButton)
 
         userImageView = findViewById(R.id.userProfileImage)
-        userWorkProfileText = findViewById(R.id.userWorkProfileText)
+        userWorkProfileEditText = findViewById(R.id.userWorkProfileEditText)
 
         userNameEditText = findViewById(R.id.userNameEditText)
         userDOBText = findViewById(R.id.userDOBText)
@@ -79,13 +77,16 @@ class EditUserDetails : AppCompatActivity() {
         userAddressEditText = findViewById(R.id.userAddressEditText)
 
 
-        val userId = intent.getStringExtra("userId")
-        if (!userId.isNullOrEmpty()) {
+        val userId = intent.getIntExtra("userId", 0)
+        Toast.makeText(this, "userid - $userId", Toast.LENGTH_SHORT).show()
+        if (userId != 0) {
             viewModel.getUserWithUserID(userId)
         }
 
         // select user date of birth using date picker dialog
         userDOBText.setOnClickListener {
+            updateUserDataInViewModel()
+
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -105,7 +106,7 @@ class EditUserDetails : AppCompatActivity() {
                 val userImage = user.userProfilePhoto.toUri()
                 Glide.with(this@EditUserDetails).load(user.userProfilePhoto).into(userImageView)
 
-                userWorkProfileText.text = user.userWorkProfile
+                userWorkProfileEditText.setText(user.userWorkProfile)
 
                 userNameEditText.setText(user.userName)
 
@@ -120,18 +121,30 @@ class EditUserDetails : AppCompatActivity() {
             }
         )
 
-
         userImageView.setOnClickListener {
+            updateUserDataInViewModel()
             imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+
 
         submitButton.setOnClickListener {
             val email = userEmailEditText.text.toString()
             val mobileNumber = userMobileNumberEditText.text.toString()
 
             if(viewModel.validateEmail(email) && viewModel.validateMobileNumber(mobileNumber)){
-                viewModel.updateUserWithUserId(userNameEditText.text.toString())
 
+                updateUserDataInViewModel()
+
+
+                if (userId != 0){
+                    viewModel.saveUpdatedUserDataInRoom()
+                }else{
+                    // new user
+                    viewModel.addNewUserData()
+                }
+
+
+                //go back to userList activity aka main activity
                 try {
                     val resultIntent = Intent().apply {
                         putExtra("userId", userId)
@@ -142,12 +155,29 @@ class EditUserDetails : AppCompatActivity() {
                     Toast.makeText(this@EditUserDetails, "Unable to go back!!", Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }else{
                 Toast.makeText(this, "Enter valid email or mobile number", Toast.LENGTH_SHORT).show()
             }
 
         }
     }
+
+    private fun updateUserDataInViewModel(){
+        viewModel.updateUserData(
+            userWorkProfile = userWorkProfileEditText.text.toString(),
+            userName = userNameEditText.text.toString(),
+            userEmail = userEmailEditText.text.toString(),
+            userMobileNumber = userMobileNumberEditText.text.toString(),
+            userAddress = userAddressEditText.text.toString()
+        )
+
+    }
+
+    override fun finish() {
+
+        //viewModel.saveUserDataInRoom()
+        super.finish()
+    }
+
+
 }

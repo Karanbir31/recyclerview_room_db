@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "USERS")
 data class User  constructor(
-    @PrimaryKey val userId: String = "",
+    @PrimaryKey(autoGenerate = true)  val userId: Int = 0,
     val userProfilePhoto: String = "",
     val userWorkProfile : String = "",
     val userName: String = "",

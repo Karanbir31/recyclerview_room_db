@@ -16,7 +16,7 @@ import com.google.android.material.card.MaterialCardView
 
 class UserRcvAdapter(
     private val users: List<User>,
-    private val onItemClick : (String) -> Unit
+    private val onItemClick : (Int) -> Unit
 ) : RecyclerView.Adapter<UserRcvAdapter.UserRcvViewHolder>() {
 
         private lateinit var context : Context
@@ -24,7 +24,7 @@ class UserRcvAdapter(
     inner class UserRcvViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var rcvLayout = view.findViewById<MaterialCardView>(R.id.rcvLayout)
         var userPic = view.findViewById<ImageView>(R.id.rcvUserImage)
-        var userId = view.findViewById<TextView>(R.id.rcvUserId)
+        var userWorkProfile = view.findViewById<TextView>(R.id.rcvUserWorkProfile)
         var userName = view.findViewById<TextView>(R.id.rcvUserName)
     }
 
@@ -42,11 +42,10 @@ class UserRcvAdapter(
         val currentUser = users[position]
 
         Glide.with(context).load(currentUser.userProfilePhoto).into(holder.userPic)
-        holder.userId.text = currentUser.userId
+        holder.userWorkProfile.text = currentUser.userWorkProfile
         holder.userName.text = currentUser.userName
         holder.rcvLayout.setOnClickListener {
             onItemClick.invoke(currentUser.userId)
-            Toast.makeText(context, "You click ${users[position].userName}", Toast.LENGTH_SHORT).show()
         }
 
     }

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/rcvUserId"
+            app:layout_constraintEnd_toStartOf="@id/rcvUserWorkProfile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -46,11 +46,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/rcvUserImageCardView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rcvUserId"
+            app:layout_constraintBottom_toTopOf="@id/rcvUserWorkProfile"
         />
 
         <TextView
-            android:id="@+id/rcvUserId"
+            android:id="@+id/rcvUserWorkProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
